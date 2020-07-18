@@ -9,7 +9,7 @@ import Alert from '../alert';
 
 import './Main.css';
 
-const ORIGIN_OF_TIME = 1410908400000; // Unix timestamp in milliseconds, Sep. 16 2014;
+const ORIGIN_OF_TIME = 1410868800000; // Unix timestamp in milliseconds, Sep. 16 2014
 
 const Main = () => {
   const initialState = {
@@ -38,7 +38,7 @@ const Main = () => {
           onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
           startDate={state.startDate}
           endDate={state.endDate}
-          minBookingDate={moment(ORIGIN_OF_TIME).toDate()}
+          minBookingDate={moment(ORIGIN_OF_TIME).local().toDate()}
           maxBookingDate={moment().toDate()}
           focusedInput={state.focusedInput}
           minBookingDays={2}

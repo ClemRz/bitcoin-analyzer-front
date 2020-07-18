@@ -31,8 +31,8 @@ const Query = React.memo((props: Props) => {
       const abortController = new AbortController(); // For in-flight abortion, solves race-conditions related issues
 
       const data = {
-        startDate: moment.utc(props.startDate).unix(),
-        endDate: moment.utc(props.endDate).unix(),
+        startDate: moment.utc(props.startDate).startOf('day').unix(),
+        endDate: moment.utc(props.endDate).endOf('day').unix(),
         symbol: SYMBOL
       };
 
