@@ -9,6 +9,8 @@ import Alert from '../alert';
 
 import './Main.css';
 
+const ORIGIN_OF_TIME = 1410908400000; // Unix timestamp in milliseconds, Sep. 16 2014;
+
 const Main = () => {
   const initialState = {
     startDate: moment().subtract(1, 'days').toDate(),
@@ -28,15 +30,15 @@ const Main = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <>
-      <div className="main">{/*TODO clement maybe I was happier with the previous yet simple date picker*/}
+      <div className="main">
         <DateRangeInput
           onDatesChange={data => dispatch({type: 'dateChange', payload: data})}
           onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
           startDate={state.startDate}
           endDate={state.endDate}
+          minBookingDate={moment(ORIGIN_OF_TIME).toDate()}
           maxBookingDate={moment().toDate()}
           focusedInput={state.focusedInput}
           minBookingDays={2}
