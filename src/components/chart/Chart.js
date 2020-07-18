@@ -22,7 +22,7 @@ const Chart = ({error, dataPoints}: Props) => {
   /**
    * converts Unix timestamp to milliseconds
    * */
-  const transformDataPoint = (dataPoint: DataPoint): DataPoint => ({...dataPoint, x: dataPoint.x * 1000});
+  const transformDataPoint = (dataPoint: DataPoint): DataPoint => ({x: dataPoint.x * 1000, y: parseFloat(dataPoint.y.toFixed(3))});
 
   const options = {
     animationEnabled: false,
@@ -39,7 +39,7 @@ const Chart = ({error, dataPoints}: Props) => {
     data: [{
       color: "#f7921b",
       type: "line",
-      toolTipContent: "{x}: USD{y}",
+      toolTipContent: "{x}: ${y}",
       xValueType: "dateTime",
       dataPoints: dataPoints?.map(transformDataPoint) || []
     }]

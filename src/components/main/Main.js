@@ -38,7 +38,7 @@ const Main = () => {
           onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
           startDate={state.startDate}
           endDate={state.endDate}
-          minBookingDate={moment(ORIGIN_OF_TIME).local().toDate()}
+          minBookingDate={moment(ORIGIN_OF_TIME).toDate()}
           maxBookingDate={moment().toDate()}
           focusedInput={state.focusedInput}
           minBookingDays={2}
