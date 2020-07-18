@@ -1,0 +1,12 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "author": "ClemRz",
+  "private": true,
+  "main": "Main.js",
+  "dependencies": {
+    "react": "*",
+    "canvasjs-react-charts": "*",
+    "react-date-picker": "*"
+  }
+}
