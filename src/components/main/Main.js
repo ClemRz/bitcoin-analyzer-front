@@ -43,7 +43,7 @@ const Main = () => {
         />
       </div>
       <div>
-        <Query url="api/" skeleton={<span>Loading...</span>} method="POST" startDate={state.startDate} endDate={state.endDate}>
+        <Query url="api/" method="POST" startDate={state.startDate} endDate={state.endDate}>
           {({error, fetching, data}) => {
             if (error) {
               return <Alert message={error.message}/>;

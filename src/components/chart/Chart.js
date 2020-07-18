@@ -37,13 +37,13 @@ const Chart = React.memo(({error, dataPoints}: Props) => {
       title: "Date"
     },
     data: [{
+      color: "#f7921b",
       type: "line",
       toolTipContent: "{x}: USD{y}",
       xValueType: "dateTime",
       dataPoints: dataPoints?.map(transformDataPoint) || []
     }]
   };
-  console.log('render chart');
   return (
     <>
       {error && <Alert message={error}/>}
