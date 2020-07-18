@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import React, {memo} from 'react';
 import {CanvasJSChart} from "canvasjs-react-charts";
 import Alert from '../alert';
 
@@ -17,7 +17,7 @@ type Props = {|
 /**
  * Controller in charge of setting up the CanvasJSChart view
  * */
-const Chart = React.memo(({error, dataPoints}: Props) => {
+const Chart = ({error, dataPoints}: Props) => {
 
   /**
    * converts Unix timestamp to milliseconds
@@ -51,6 +51,6 @@ const Chart = React.memo(({error, dataPoints}: Props) => {
       <CanvasJSChart options={options}/>
     </>
   );
-});
+};
 
-export default Chart;
+export default memo<Props>(Chart);
