@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 type Props = {|
   url: string,
@@ -8,14 +8,20 @@ type Props = {|
   method: ?string,
 |};
 
-const Query = (props: Props) => {
+const shouldSkipUpdate = (props: Props, nextProps: Props) => {
+  const sameStartDate = props.startDate.toString() === nextProps.startDate.toString();
+  const sameEndDate = props.endDate.toString() === nextProps.endDate.toString();
+  return sameStartDate && sameEndDate;
+};
+
+const Query = React.memo((props: Props) => {
   const [error, setError] = useState(null);
   const [fetching, setIsFetching] = useState(true);
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
+    console.log('Fetching', props);
     const data = {startDate: props.startDate, endDate: props.endDate};
-    console.log('Fetching', props.url, data);
     fetch(props.url, {
       method: props.method || 'GET',
       body: JSON.stringify(data)
@@ -36,6 +42,6 @@ const Query = (props: Props) => {
       );
   }, [props]);
   return props.children({error, fetching, data: response});
-};
+}, shouldSkipUpdate);
 
 export default Query;

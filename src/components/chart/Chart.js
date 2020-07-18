@@ -17,12 +17,12 @@ type Props = {|
 /**
  * Controller in charge of setting up the CanvasJSChart view
  * */
-const Chart = ({ error, dataPoints }: Props) => {
+const Chart = React.memo(({error, dataPoints}: Props) => {
 
   /**
    * converts Unix timestamp to milliseconds
    * */
-  const transformDataPoint = (dataPoint : DataPoint) : DataPoint => ({...dataPoint, x: dataPoint.x * 1000});
+  const transformDataPoint = (dataPoint: DataPoint): DataPoint => ({...dataPoint, x: dataPoint.x * 1000});
 
   const options = {
     animationEnabled: false,
@@ -46,11 +46,11 @@ const Chart = ({ error, dataPoints }: Props) => {
   console.log('render chart');
   return (
     <>
-      {error && <Alert message={error} />}
-      {!dataPoints && <Alert message="No data to display" />}
-      <CanvasJSChart options={options} />
+      {error && <Alert message={error}/>}
+      {!dataPoints && <Alert message="No data to display"/>}
+      <CanvasJSChart options={options}/>
     </>
-    );
-};
+  );
+});
 
 export default Chart;
