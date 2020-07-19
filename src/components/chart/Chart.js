@@ -9,20 +9,24 @@ type DataPoint = {|
   y: number,
 |};
 
+type DbDataPoint = {|
+  timestamp: number,
+  close: string,
+|};
+
 type Props = {|
-  error: ?string,
-  dataPoints: ?Array<DataPoint>,
+  datapoints: Array<DbDataPoint>,
 |};
 
 /**
  * Controller in charge of setting up the CanvasJSChart view
  * */
-const Chart = ({error, dataPoints}: Props) => {
+const Chart = ({datapoints}: Props) => {
 
   /**
    * converts Unix timestamp to milliseconds
    * */
-  const transformDataPoint = (dataPoint: DataPoint): DataPoint => ({x: dataPoint.x * 1000, y: parseFloat(dataPoint.y.toFixed(3))});
+  const transformDataPoint = (dataPoint: DbDataPoint): DataPoint => ({x: dataPoint.timestamp * 1000, y: parseFloat(dataPoint.close)});
 
   const options = {
     animationEnabled: false,
@@ -41,16 +45,10 @@ const Chart = ({error, dataPoints}: Props) => {
       type: "line",
       toolTipContent: "{x}: ${y}",
       xValueType: "dateTime",
-      dataPoints: dataPoints?.map(transformDataPoint) || []
+      dataPoints: datapoints.map(transformDataPoint)
     }]
   };
-  return (
-    <>
-      {error && <Alert message={error}/>}
-      {!dataPoints && <Alert message="No data to display"/>}
-      <CanvasJSChart options={options}/>
-    </>
-  );
+  return <CanvasJSChart options={options}/>;
 };
 
 export default memo<Props>(Chart);

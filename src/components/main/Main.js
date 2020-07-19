@@ -52,7 +52,13 @@ const Main = () => {
             } else if (fetching) {
               return <div>Please wait...</div>;
             } else {
-              return <Chart {...data}/>;
+              return (
+                <>
+                  {data.error && <Alert message={data.error}/>}
+                  {!data && <Alert message="No data to display"/>}
+                  <Chart datapoints={data.error ? [] : data}/>
+                </>
+              );
             }
           }}
         </Query>
