@@ -2,10 +2,8 @@
 
 import React, {useReducer} from 'react';
 import {DateRangeInput} from '@datepicker-react/styled'
+import ChartQuery from "../chart/ChartQuery";
 import moment from 'moment';
-import Query from '../query';
-import Chart from '../chart';
-import Alert from '../alert';
 
 import './Main.css';
 
@@ -30,9 +28,10 @@ const Main = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <>
-      <div className="main">
+    <main>
+      <section className="filter">
         <DateRangeInput
           onDatesChange={data => dispatch({type: 'dateChange', payload: data})}
           onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
@@ -43,27 +42,14 @@ const Main = () => {
           focusedInput={state.focusedInput}
           minBookingDays={2}
         />
-      </div>
-      <div>
-        <Query url="api/" method="POST" startDate={state.startDate} endDate={state.endDate}>
-          {({error, fetching, data}) => {
-            if (error) {
-              return <Alert message={error.message}/>;
-            } else if (fetching) {
-              return <div>Please wait...</div>;
-            } else {
-              return (
-                <>
-                  {data.error && <Alert message={data.error}/>}
-                  {!data && <Alert message="No data to display"/>}
-                  <Chart datapoints={data.error ? [] : data}/>
-                </>
-              );
-            }
-          }}
-        </Query>
-      </div>
-    </>
+      </section>
+      <section>
+        <ChartQuery
+          startDate={moment.utc(state.startDate).startOf('day').unix()}
+          endDate={moment.utc(state.endDate).endOf('day').unix()}
+        />
+      </section>
+    </main>
   );
 };
 

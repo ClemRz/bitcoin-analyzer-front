@@ -1,9 +1,9 @@
-.main {
+.filter {
     margin: 10px;
     display: flex;
     justify-content: center;
 }
 
-.main > div {
+.filter > div {
     z-index: 1;
 }

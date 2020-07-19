@@ -1,8 +1,7 @@
 // @flow
 
 import React, {memo} from 'react';
-import {CanvasJSChart} from "canvasjs-react-charts";
-import Alert from '../alert';
+import {CanvasJSChart} from 'canvasjs-react-charts';
 
 type DataPoint = {|
   x: number,
@@ -31,7 +30,7 @@ const Chart = ({datapoints}: Props) => {
   const options = {
     animationEnabled: false,
     exportEnabled: true,
-    theme: "light2", // "light1", "dark1", "dark2"
+    theme: "light2",
     axisY: {
       title: "Bitcoin value (USD)",
       includeZero: false,

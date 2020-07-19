@@ -1,0 +1,10 @@
+.accordion {
+    display: inline;
+    margin-left: 5px;
+}
+
+.accordion .alert-link {
+    font-weight: normal;
+    font-size: x-small;
+    font-style: italic;
+}
