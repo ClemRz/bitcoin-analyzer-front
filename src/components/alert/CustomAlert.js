@@ -4,12 +4,12 @@ import * as React from 'react';
 import Alert from 'react-bootstrap/Alert';
 
 import './CustomAlert.css';
-import MoreInfo from "./MoreInfo";
+import MoreInfo from './MoreInfo';
 
 type Props = {|
   message: string,
+  code: number,
   variant?: ?string,
-  code?: ?number,
 |};
 
 /**
@@ -17,6 +17,7 @@ type Props = {|
  * This also allow to filter the errors we want to display on the UI.
  * */
 const ERROR_MAP = {
+  '21': {message: 'Invalid values.', info: 'Please make sure you entered both dates properly.'},
   '22': {message: 'Invalid dates.', info: 'Please make sure that the start date is not older than the end date.\nEnd date can\'t be in the future.\nStart date can\'t be before first data point (Sep. 16 2014).'}
 };
 

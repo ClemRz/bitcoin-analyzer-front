@@ -30,20 +30,20 @@ const Chart = ({datapoints}: Props) => {
   const options = {
     animationEnabled: false,
     exportEnabled: true,
-    theme: "light2",
+    theme: 'light2',
     axisY: {
-      title: "Bitcoin value (USD)",
+      title: 'Bitcoin value (USD)',
       includeZero: false,
-      prefix: "$"
+      prefix: '$'
     },
     axisX: {
-      title: "Date"
+      title: 'Date'
     },
     data: [{
-      color: "#f7921b",
-      type: "line",
-      toolTipContent: "{x}: ${y}",
-      xValueType: "dateTime",
+      color: '#f7921b',
+      type: 'line',
+      toolTipContent: '{x}: ${y}',
+      xValueType: 'dateTime',
       dataPoints: datapoints.map(transformDataPoint)
     }]
   };

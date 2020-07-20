@@ -3,8 +3,8 @@ import React, {useEffect, useState} from 'react';
 type Props = {|
   url: string,
   children: any,
-  payload: any,
-  method: ?string,
+  payload?: ?any,
+  method?: ?string,
 |};
 
 const Query = React.memo((props: Props) => {

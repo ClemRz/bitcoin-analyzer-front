@@ -1,15 +1,13 @@
 // @flow
 
 import React, {memo} from 'react';
-import CustomAlert from "../alert/CustomAlert";
-import Chart from "./Chart";
-import Query from "../query";
-import moment from "moment";
-import Spinner from "react-bootstrap/Spinner";
+import CustomAlert from '../alert/CustomAlert';
+import Chart from './Chart';
+import Query from '../query';
+import Spinner from 'react-bootstrap/Spinner';
 
-const ENDPOINT_URL = "api/";
-const ENDPOINT_METHOD = "POST";
-const SYMBOL = 'BTC-USD';
+const ENDPOINT_URL = '/';
+const SYMBOL = 'BTCUSD';
 
 type Props = {|
   startDate: number,
@@ -17,8 +15,6 @@ type Props = {|
 |};
 
 const ChartQuery = (props: Props) => {
-
-  const payload = {...props, symbol: SYMBOL};
 
   const spinner = (
     <div>
@@ -34,11 +30,13 @@ const ChartQuery = (props: Props) => {
     });
   };
 
+  const $url = ENDPOINT_URL + SYMBOL + `/${props.startDate}/${props.endDate}.json`;
+
   return (
-    <Query url={ENDPOINT_URL} method={ENDPOINT_METHOD} payload={payload}>
+    <Query url={$url}>
       {({error, fetching, data}) => {
         if (error) {
-          return <CustomAlert message={error.message}/>;
+          return <CustomAlert message={error.message} code={0}/>;
         } else if (fetching) {
           return spinner;
         } else {

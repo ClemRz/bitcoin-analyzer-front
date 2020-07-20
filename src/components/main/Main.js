@@ -2,7 +2,7 @@
 
 import React, {useReducer} from 'react';
 import {DateRangeInput} from '@datepicker-react/styled'
-import ChartQuery from "../chart/ChartQuery";
+import ChartQuery from '../chart/ChartQuery';
 import moment from 'moment';
 
 import './Main.css';
