@@ -6,7 +6,6 @@ import Chart from './Chart';
 import Query from '../query';
 import Spinner from 'react-bootstrap/Spinner';
 
-const ENDPOINT_URL = '/';
 const SYMBOL = 'BTCUSD';
 
 type Props = {|
@@ -30,7 +29,11 @@ const ChartQuery = (props: Props) => {
     });
   };
 
-  const $url = ENDPOINT_URL + SYMBOL + `/${props.startDate}/${props.endDate}.json`;
+  const apiUrl = process.env.REACT_APP_API_URL;
+  if (!apiUrl) {
+    throw new Error('Environment variable REACT_APP_API_URL is not set.');
+  }
+  const $url = apiUrl + SYMBOL + `/${props.startDate}/${props.endDate}.json`;
 
   return (
     <Query url={$url}>
