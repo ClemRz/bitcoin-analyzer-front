@@ -42,6 +42,7 @@ const Chart = ({datapoints}: Props) => {
     data: [{
       color: '#f7921b',
       type: 'line',
+      // eslint-disable-next-line
       toolTipContent: '{x}: ${y}',
       xValueType: 'dateTime',
       dataPoints: datapoints.map(transformDataPoint)
