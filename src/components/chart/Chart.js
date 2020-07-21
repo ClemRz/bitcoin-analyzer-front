@@ -5,33 +5,20 @@ import {CanvasJSChart} from 'canvasjs-react-charts';
 import moment from 'moment';
 
 type DataPoint = {|
-  x: Date,
-  y: number,
-|};
-
-type DbDataPoint = {|
-  timestamp: number,
-  close: string,
+  x: Date,    // Date of the data-point
+  y: number,  // Value of the data-point
 |};
 
 type Props = {|
-  datapoints: Array<DbDataPoint>,
+  dataPoints: Array<DataPoint>, // Values for the chart to display
 |};
 
 /**
- * Controller in charge of setting up the CanvasJSChart view
+ * Wrapper for the CanvasJSChart view
  * */
-const Chart = ({datapoints}: Props) => {
+const Chart = ({dataPoints}: Props) => {
 
   const DT_FORMAT = 'MMMM Do YYYY, h:mm:ss a';
-
-  /**
-   * converts Unix timestamp to local dateTime object
-   * */
-  const transformDataPoint = (dataPoint: DbDataPoint): DataPoint => ({
-    x: moment.unix(dataPoint.timestamp).local().toDate(),
-    y: parseFloat(dataPoint.close)
-  });
 
   const options = {
     animationEnabled: false,
@@ -56,9 +43,7 @@ const Chart = ({datapoints}: Props) => {
     data: [{
       color: '#f7921b',
       type: 'line',
-      // eslint-disable-next-line
-      //toolTipContent: '{x}: ${y}',
-      dataPoints: datapoints.map(transformDataPoint)
+      dataPoints: dataPoints
     }]
   };
   return <CanvasJSChart options={options}/>;

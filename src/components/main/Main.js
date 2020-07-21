@@ -16,6 +16,9 @@ const initialState = {
   focusedInput: null,
 };
 
+/**
+ * State management
+ * */
 const reducer = (state, action) => {
   switch (action.type) {
     case 'focusChange':
@@ -27,6 +30,10 @@ const reducer = (state, action) => {
   }
 };
 
+/**
+ * Displays the main section of the page.
+ * Manages the user interaction state.
+ * */
 const Main = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);

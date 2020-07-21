@@ -1,20 +1,29 @@
 // @flow
 
 import React, {memo} from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+import moment from "moment";
 import CustomAlert from '../alert/CustomAlert';
 import Chart from './Chart';
 import Query from '../query';
-import Spinner from 'react-bootstrap/Spinner';
 
 import './ChartQuery.css';
 
 const SYMBOL = 'BTCUSD';
 
 type Props = {|
-  startDate: number,
-  endDate: number
+  startDate: number,  // Start unix timestamp
+  endDate: number     // End unix timestamp
 |};
 
+type ApiDataPoint = {|
+  timestamp: number,  // Unix timestamp received from the API
+  close: string,      // Value received from the API
+|};
+
+/**
+ * Controller in charge of launching the query to the API and displaying the proper information during and in return.
+ * */
 const ChartQuery = (props: Props) => {
   if (isNaN(props.startDate) || isNaN(props.endDate)) {
     return <CustomAlert message="Incorrect dates" code={21}/>;
@@ -34,6 +43,14 @@ const ChartQuery = (props: Props) => {
     });
   };
 
+  /**
+   * converts Unix timestamp to local dateTime object and parses the value.
+   * */
+  const transformDataPoint = (dataPoint: ApiDataPoint): DataPoint => ({
+    x: moment.unix(dataPoint.timestamp).local().toDate(),
+    y: parseFloat(dataPoint.close)
+  });
+
   const apiUrl = process.env.REACT_APP_API_URL;
   if (!apiUrl) {
     throw new Error('Environment variable REACT_APP_API_URL is not set.');
@@ -52,7 +69,7 @@ const ChartQuery = (props: Props) => {
             <>
               {data.error && <CustomAlert {...data.error}/>}
               {!hasValues(data) && !data.error && <CustomAlert code={-1} message="No data to display for the selected dates." variant="info"/>}
-              <Chart datapoints={data.error ? [] : data}/>
+              <Chart dataPoints={data.error ? [] : data.map(transformDataPoint)}/>
             </>
           );
         }

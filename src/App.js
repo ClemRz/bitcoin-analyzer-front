@@ -8,6 +8,9 @@ import Footer from './components/footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+/**
+ * Root component of the React application
+ * */
 function App() {
   return (
     <div className="app">

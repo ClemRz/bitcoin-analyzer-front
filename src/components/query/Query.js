@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react';
 
 type Props = {|
-  url: string,
-  children: any,
-  payload?: ?any,
-  method?: ?string,
+  url: string,      // URL for the resource to fetch
+  children: any,    // Nodes to display
+  payload?: ?any,   // Payload to pass to the query
+  method?: ?string, // HTTP method
 |};
 
+/**
+ * Fetches a resource.
+ * The children must be set up to receive 3 parameters:
+ *   - error: when the request returned an error object
+ *   - fetching: is true while the promise is being resolved, false once it is resolved
+ *   - data: the response returned by the resource when succeeded
+ * */
 const Query = React.memo((props: Props) => {
   const [error, setError] = useState(null);
   const [fetching, setIsFetching] = useState(true);
@@ -45,7 +52,7 @@ const Query = React.memo((props: Props) => {
       );
 
     return () => {
-      abortController.abort();
+      abortController.abort(); // For in-flight abortion, solves race-conditions related issues
     };
   }, [props]);
   return props.children({error, fetching, data: response});

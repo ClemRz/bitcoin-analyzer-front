@@ -4,6 +4,9 @@ import * as React from 'react';
 
 import './Footer.css';
 
+/**
+ * Footer
+ * */
 const Footer = () => (
   <footer className="footer">
     © 2020 Copyright: <a href="https://github.com/ClemRz/bitcoin-analyzer-front">Clément Ronzon</a>

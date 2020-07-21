@@ -6,9 +6,12 @@ import {Accordion, Alert} from 'react-bootstrap'
 import './MoreInfo.css';
 
 type Props = {|
-  info: string,
+  info: string, // Information to be displayed inside the accordion
 |};
 
+/**
+ * Displays an accordion
+ * */
 const MoreInfo = ({info}: Props) => (
   <Accordion>
       <Accordion.Toggle as={Alert.Link} variant="link" eventKey="0">

@@ -2,14 +2,14 @@
 
 import * as React from 'react';
 import Alert from 'react-bootstrap/Alert';
-
-import './CustomAlert.css';
 import MoreInfo from './MoreInfo';
 
+import './CustomAlert.css';
+
 type Props = {|
-  message: string,
-  code: number,
-  variant?: ?string,
+  message: string,    // Error message to be displayed (might be filtered, see below)
+  code: number,       // Error code
+  variant?: ?string,  // Variant for the alert style, see react-bootstrap/Alert for available values
 |};
 
 /**
@@ -21,6 +21,11 @@ const ERROR_MAP = {
   '22': {message: 'Invalid dates.', info: 'Please make sure that the start date is not older than the end date.\nEnd date can\'t be in the future.\nStart date can\'t be before first data point (Sep. 16 2014).'}
 };
 
+/**
+ * Displays an alert message.
+ * The code is mapped to a human-readable message.
+ * If some info is available it is displayed inside an accordion.
+ * */
 const CustomAlert = ({message, code, variant}: Props) => {
     const generic = (info) => {
       return {
