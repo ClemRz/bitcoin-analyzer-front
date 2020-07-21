@@ -2,9 +2,10 @@
 
 import React, {memo} from 'react';
 import {CanvasJSChart} from 'canvasjs-react-charts';
+import moment from 'moment';
 
 type DataPoint = {|
-  x: number,
+  x: Date,
   y: number,
 |};
 
@@ -22,10 +23,15 @@ type Props = {|
  * */
 const Chart = ({datapoints}: Props) => {
 
+  const DT_FORMAT = 'MMMM Do YYYY, h:mm:ss a';
+
   /**
-   * converts Unix timestamp to milliseconds
+   * converts Unix timestamp to local dateTime object
    * */
-  const transformDataPoint = (dataPoint: DbDataPoint): DataPoint => ({x: dataPoint.timestamp * 1000, y: parseFloat(dataPoint.close)});
+  const transformDataPoint = (dataPoint: DbDataPoint): DataPoint => ({
+    x: moment.unix(dataPoint.timestamp).local().toDate(),
+    y: parseFloat(dataPoint.close)
+  });
 
   const options = {
     animationEnabled: false,
@@ -37,14 +43,21 @@ const Chart = ({datapoints}: Props) => {
       prefix: '$'
     },
     axisX: {
-      title: 'Date'
+      title: `Date (local time)`,
+      labelAngle: -45
+    },
+    toolTip: {
+      contentFormatter: (e) => {
+        const dp = e.entries[0].dataPoint;
+        const dt = moment(dp.x).format(DT_FORMAT);
+        return `${dt}: USD${dp.y}`;
+      }
     },
     data: [{
       color: '#f7921b',
       type: 'line',
       // eslint-disable-next-line
-      toolTipContent: '{x}: ${y}',
-      xValueType: 'dateTime',
+      //toolTipContent: '{x}: ${y}',
       dataPoints: datapoints.map(transformDataPoint)
     }]
   };
