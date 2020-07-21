@@ -14,6 +14,9 @@ type Props = {|
 |};
 
 const ChartQuery = (props: Props) => {
+  if (isNaN(props.startDate) || isNaN(props.endDate)) {
+    return <CustomAlert message="Incorrect dates" code={21}/>;
+  }
 
   const spinner = (
     <div>

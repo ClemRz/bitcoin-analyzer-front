@@ -38,12 +38,12 @@ const Chart = ({datapoints}: Props) => {
     exportEnabled: true,
     theme: 'light2',
     axisY: {
-      title: 'Bitcoin value (USD)',
+      title: 'Bitcoin close value (USD)',
       includeZero: false,
       prefix: '$'
     },
     axisX: {
-      title: `Date (local time)`,
+      title: 'Local date and time',
       labelAngle: -45
     },
     toolTip: {
