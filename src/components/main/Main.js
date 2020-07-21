@@ -1,9 +1,10 @@
 // @flow
 
-import React, {useReducer} from 'react';
+import React, {useReducer, useState} from 'react';
 import {DateRangeInput} from '@datepicker-react/styled'
-import ChartQuery from '../chart/ChartQuery';
 import moment from 'moment';
+import ChartQuery from '../chart/ChartQuery';
+import CustomAlert from "../alert/CustomAlert";
 
 import './Main.css';
 
@@ -29,10 +30,22 @@ const reducer = (state, action) => {
 const Main = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [error, setError] = useState(false);
+
+  /**
+   * This is a temporary fix for https://github.com/tresko/react-datepicker/issues/99
+   * */
+  const handleKeyUp = (event) => {
+    if (event.isComposing || event.keyCode === 229) { // FF65 compatibility
+      return;
+    }
+    const id = event.target.id;
+    setError((id === 'startDate' || id === 'endDate') && !moment(event.target.value).isValid());
+  };
 
   return (
     <main>
-      <section className="filter">
+      <section className="filter" onKeyUp={handleKeyUp}>
         <DateRangeInput
           onDatesChange={data => dispatch({type: 'dateChange', payload: data})}
           onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
@@ -42,13 +55,15 @@ const Main = () => {
           maxBookingDate={moment().toDate()}
           focusedInput={state.focusedInput}
           minBookingDays={1}
+          startDateInputId="startDate"
+          endDateInputId="endDate"
         />
       </section>
       <section>
-        <ChartQuery
-          startDate={moment(state.startDate).unix()}
-          endDate={moment(state.endDate).unix()}
-        />
+        {error ?
+          <CustomAlert message="Incorrect dates" code={21}/> :
+          <ChartQuery startDate={moment(state.startDate).unix()} endDate={moment(state.endDate).unix()}/>
+        }
       </section>
     </main>
   );
