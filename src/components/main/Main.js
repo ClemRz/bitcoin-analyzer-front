@@ -40,13 +40,13 @@ const Main = () => {
           minBookingDate={moment(ORIGIN_OF_TIME).toDate()}
           maxBookingDate={moment().toDate()}
           focusedInput={state.focusedInput}
-          minBookingDays={2}
+          minBookingDays={1}
         />
       </section>
       <section>
         <ChartQuery
-          startDate={moment.utc(state.startDate).startOf('day').unix()}
-          endDate={moment.utc(state.endDate).endOf('day').unix()}
+          startDate={moment(state.startDate).unix()}
+          endDate={moment(state.endDate).unix()}
         />
       </section>
     </main>
