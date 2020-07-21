@@ -5,6 +5,9 @@
   "private": true,
   "main": "Chart.js",
   "dependencies": {
-    "react": "*"
+    "react": "*",
+    "canvasjs-react-charts": "*",
+    "moment": "*",
+    "react-bootstrap/Spinner": "*"
   }
 }

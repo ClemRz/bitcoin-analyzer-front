@@ -5,6 +5,7 @@
   "private": true,
   "main": "Alert.js",
   "dependencies": {
-    "react": "*"
+    "react": "*",
+    "react-bootstrap": "*"
   }
 }
