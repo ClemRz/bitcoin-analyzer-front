@@ -44,5 +44,5 @@
     "flow-bin": "^0.129.0",
     "flow-remove-types": "^2.129.0"
   },
-  "proxy": "http://bitcoin-analyzer.local"
+  "proxy": "http://localhost"
 }

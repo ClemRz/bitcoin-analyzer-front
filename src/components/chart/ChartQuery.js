@@ -55,7 +55,7 @@ const ChartQuery = (props: Props) => {
   if (!apiUrl) {
     throw new Error('Environment variable REACT_APP_API_URL is not set.');
   }
-  const $url = apiUrl + SYMBOL + `/${props.startDate}/${props.endDate}.json`;
+  const $url = apiUrl + `${props.startDate}/${props.endDate}/` + SYMBOL +'.json';
 
   return (
     <Query url={$url}>
