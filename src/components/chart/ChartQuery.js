@@ -2,7 +2,7 @@
 
 import React, {memo} from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import moment from "moment";
+import moment from 'moment';
 import CustomAlert from '../alert/CustomAlert';
 import Chart from './Chart';
 import Query from '../query';
@@ -55,10 +55,18 @@ const ChartQuery = (props: Props) => {
   if (!apiUrl) {
     throw new Error('Environment variable REACT_APP_API_URL is not set.');
   }
-  const $url = apiUrl + `${props.startDate}/${props.endDate}/` + SYMBOL +'.json';
+
+  const parameters = [props.startDate, props.endDate, SYMBOL];
+
+  function replacer(match, group) {
+    const i = parseInt(group, 10);
+    return parameters[i - 1];
+  }
+
+  const url = apiUrl.replace(/%(\d)/g, replacer);
 
   return (
-    <Query url={$url}>
+    <Query url={url}>
       {({error, fetching, data}) => {
         if (error) {
           return <CustomAlert message={error.message} code={0}/>;
