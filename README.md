@@ -26,10 +26,10 @@ At the root of the project, run:
 
 ```shell script
 $ docker build -t clemrz/bitcoin-analyzer-front:dev
-$ docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true --name ba_front_dev clemrz/bitcoin-analyzer-front:dev
+$ docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 80:3000 -e CHOKIDAR_USEPOLLING=true --name ba_front_dev clemrz/bitcoin-analyzer-front:dev
 ```
 
-Then visit http://localhost:3001/
+Then visit http://localhost
 
 (You can specify a `proxy` url in `package.json` to point to your api server if you need it)
 
@@ -39,10 +39,10 @@ At the root of the project, run:
 
 ```shell script
 $ docker build -f Dockerfile.prod -t clemrz/bitcoin-analyzer-front:prod .
-$ docker run -itd --rm -p 3001:80 --name ba_front_prod clemrz/bitcoin-analyzer-front:prod
+$ docker run -itd --rm -p 80:80 --name ba_front_prod clemrz/bitcoin-analyzer-front:prod
 ```
 
-Then visit http://localhost:3001/
+Then visit http://localhost
 
 ## Deployment without Docker
 
@@ -69,9 +69,9 @@ $ npm install
 
 ### For developpers
 
-First change the `proxy` url in `package.json` to point to your api server.
+If you need a `proxy`, set it up in `package.json` so it points to the data API.
 
-Make sure the `.env` is set according to your environment.
+Make sure the `.env` set the API endpoint according to your environment.
 
 You can start and run the app locally by running:
 
