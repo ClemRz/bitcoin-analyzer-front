@@ -9,7 +9,7 @@ It is set to display the last 24 hours by, a datepicker range filter allows the 
 
 When the filter is changed, the graph is redrawn to reflect the new filter.
 
-## With Docker
+## Deployment with Docker
 
 Clone this repository on your machine:
 
@@ -18,12 +18,9 @@ $ git clone https://github.com/ClemRz/bitcoin-analyzer-front.git
 $ cd bitcoin-analyzer-front
 ```
 
-### Development environment
-
-~~TODO clement, might disappear with docker-compose: 
-First change the `proxy` url in `package.json` to point to your api server.~~
-
 Make sure the `.env` is set according to your environment.
+
+### Development environment
 
 At the root of the project, run:
 
@@ -32,22 +29,22 @@ $ docker build -t clemrz/bitcoin-analyzer-front:dev
 $ docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true --name ba_front_dev clemrz/bitcoin-analyzer-front:dev
 ```
 
-Then visit http://<docker-machine-ip>:3001/
+Then visit http://localhost:3001/
+
+(You can specify a `proxy` url in `package.json` to point to your api server if you need it)
 
 ### Production environment
-
-Make sure the `.env` is set according to your environment.
 
 At the root of the project, run:
 
 ```shell script
 $ docker build -f Dockerfile.prod -t clemrz/bitcoin-analyzer-front:prod .
-$ docker run -itd --rm -p 1337:80 --name ba_front_prod clemrz/bitcoin-analyzer-front:prod
+$ docker run -itd --rm -p 3001:80 --name ba_front_prod clemrz/bitcoin-analyzer-front:prod
 ```
 
-Then visit http://<docker-machine-ip>:1337/
+Then visit http://localhost:3001/
 
-## Without Docker
+## Deployment without Docker
 
 Clone this repository on your machine:
 
