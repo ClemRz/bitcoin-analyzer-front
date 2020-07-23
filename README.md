@@ -26,10 +26,7 @@ At the root of the project, run:
 
 ```shell script
 $ docker build -t clemrz/bitcoin-analyzer-front:dev
-$ docker run -it --rm \
-  -v ${PWD}:/app -v /app/node_modules \
-  -p 80:3000 -e CHOKIDAR_USEPOLLING=true \
-  --name ba_front_dev clemrz/bitcoin-analyzer-front:dev
+$ docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 80:3000 -e CHOKIDAR_USEPOLLING=true --name ba_front_dev clemrz/bitcoin-analyzer-front:dev
 ```
 
 Then visit http://localhost
