@@ -56,7 +56,7 @@ const ChartQuery = (props: Props) => {
     throw new Error('Environment variable REACT_APP_API_URL is not set.');
   }
 
-  const parameters = [props.startDate, props.endDate, SYMBOL];
+  const parameters = [SYMBOL, props.startDate, props.endDate];
 
   function replacer(match, group) {
     const i = parseInt(group, 10);
