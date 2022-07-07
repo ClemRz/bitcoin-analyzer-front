@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.0",
     "canvasjs-react-charts": "^1.0.5",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "react": "^16.13.1",
     "react-bootstrap": "^1.2.2",
     "react-dates": "^21.8.0",
